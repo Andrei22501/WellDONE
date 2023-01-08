@@ -34,6 +34,7 @@ public class init {
 
             Set<Role> adminRole = new HashSet<>();
             adminRole.add(admin);
+            adminRole.add(user);
             Set<Role> userRole = new HashSet<>();
             userRole.add(user);
 

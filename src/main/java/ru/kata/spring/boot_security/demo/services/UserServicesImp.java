@@ -48,6 +48,7 @@ public class UserServicesImp implements UserServices {
     @Override
     @Transactional
     public void save(User user) {
+        User us = new User();
         encodePassword(user);
         setRolesForUser(user);
         userDao.save(user);
