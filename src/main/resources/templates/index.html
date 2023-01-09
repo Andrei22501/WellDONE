@@ -48,7 +48,13 @@
         <div class="mb-3">
             <label for="password" class="col-sm-1 col-form-label">Password</label>
             <div class="col-sm-3">
-                <h2 type="password" th:text="*{password}" class="form-control" id="password"></h2>
+                <input type="password" th:field="*{password}" class="form-control" id="password">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="roles" class="col-sm-1 col-form-label">Role</label>
+            <div class="col-sm-3">
+                <h6 type="text" th:text="*{roles}" class="form-control" id="roles"></h6>
             </div>
         </div>
     </center>
