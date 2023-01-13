@@ -27,8 +27,8 @@ public class init {
     public void postConstruct(){
         List<User> users = userServices.listUsers();
         if(users.isEmpty()){
-            Role user = new Role("ROLE_USER");
-            Role admin = new Role("ROLE_ADMIN");
+            Role user = new Role("USER");
+            Role admin = new Role("ADMIN");
             roleServices.save(admin);
             roleServices.save(user);
 
@@ -38,8 +38,8 @@ public class init {
             Set<Role> userRole = new HashSet<>();
             userRole.add(user);
 
-            userServices.save(new User("admin","admin", "admin@gmail.com","admin", adminRole));
-            userServices.save(new User("user", "user", "user@gmail.com", "user", userRole));
+            userServices.save(new User("admin","admin", 21 ,"admin@gmail.com","admin", adminRole));
+            userServices.save(new User("user", "user", 24 , "user@gmail.com", "user", userRole));
 
 
         }

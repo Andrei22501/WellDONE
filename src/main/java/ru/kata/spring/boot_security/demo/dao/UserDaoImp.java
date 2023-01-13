@@ -42,12 +42,8 @@ public class UserDaoImp implements UserDao {
                 .getSingleResult();
     }
     @Override
-    public void update(int id, User user) {
-        User userUpdate = show(id);
-        userUpdate.setName(user.getName());
-        userUpdate.setLastname(user.getLastname());
-        userUpdate.setEmail(user.getEmail());
-        userUpdate.setRoles(user.getRoles());
+    public void update(User user) {
+       entityManager.merge(user);
     }
     @Override
     public void delete(int id) {

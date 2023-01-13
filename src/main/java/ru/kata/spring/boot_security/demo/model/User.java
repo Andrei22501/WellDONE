@@ -27,14 +27,17 @@ public class User implements UserDetails {
     @Column
     private String lastname;
     @Column
+    private int age;
+    @Column
     private String email;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
     private String password;
 
-    public User(String name, String lastname, String email, String password, Set<Role> roles) {
+    public User(String name, String lastname, int age ,String email, String password, Set<Role> roles) {
         this.name = name;
         this.lastname = lastname;
+        this.age = age;
         this.email = email;
         this.password = password;
         this.roles = roles;
@@ -66,6 +69,14 @@ public class User implements UserDetails {
 
     public void setLastname(String lastName) {
         this.lastname = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getEmail() {

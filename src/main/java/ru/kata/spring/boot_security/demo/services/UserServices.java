@@ -12,7 +12,7 @@ public interface UserServices {
     User showEmail(String email);
 
     @Transactional
-    void update(int id, User user);
+    void update(User user);
     @Transactional
     void save(User user);
     User show(int id);

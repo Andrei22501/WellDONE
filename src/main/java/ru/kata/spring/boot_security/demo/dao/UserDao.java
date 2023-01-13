@@ -12,7 +12,7 @@ public interface UserDao {
 
     User showEmail(String email);
 
-    void update(int id, User user);
+    void update(User user);
 
     void delete(int id);
 

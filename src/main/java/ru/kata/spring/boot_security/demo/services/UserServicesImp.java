@@ -40,10 +40,10 @@ public class UserServicesImp implements UserServices {
 
     @Override
     @Transactional
-    public void update(int id, User user) {
+    public void update(User user) {
         encodePassword(user);
         setRolesForUser(user);
-        userDao.update(id,user);
+        userDao.update(user);
     }
     @Override
     @Transactional
