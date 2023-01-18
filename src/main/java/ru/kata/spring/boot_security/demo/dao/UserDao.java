@@ -5,7 +5,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 import java.util.List;
 
 public interface UserDao {
-    @SuppressWarnings("unchecked")
     List<User> listUsers();
     User show(int id);
     User showName(String name);

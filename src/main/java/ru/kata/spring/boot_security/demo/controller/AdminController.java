@@ -32,10 +32,11 @@ public class AdminController {
     }
     @GetMapping()
     public String userList( Model model, Principal principal){
-        model.addAttribute("info", userServices.showName(principal.getName()));
+        model.addAttribute("info", userServices.showEmail(principal.getName()));
         model.addAttribute("usersList", userServices.listUsers());
         model.addAttribute("roleList", roleServices.listRole());
-        model.addAttribute("NewUser", new User());
+        User user = new User();
+        model.addAttribute("NewUser", user);
         return "admin";
     }
     @PatchMapping ("/{id}")
@@ -55,27 +56,4 @@ public class AdminController {
         userServices.save(user);
         return "redirect:/admin";
     }
-//        return "index";
-//        model.addAttribute("info", userServices.showName(authentication.getName()));
-//    public String info(@PathVariable("name") String name,Authentication authentication, Model model){
-//    @GetMapping("/admin")
-//    }
-//        return "editTable";
-//        model.addAttribute("roleList", roleServices.listRole());
-//        model.addAttribute("user", userServices.show(id));
-//    public String edit(@PathVariable("id") int id, Model model) {
-//    @PatchMapping("/{id}")
-//    @GetMapping("")
-//    public String userList2(Model model){
-//        List<Role> roles = roleServices.listRole();
-//        model.addAttribute("roleList", roles);
-//        model.addAttribute("NewUser", new User());
-//        return "admin";
-//    }
-//    }
-//    @PatchMapping("/{id}")
-//    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-//        userServices.update(user);
-//        return "redirect:/admin";
-//    }
 }

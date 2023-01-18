@@ -1,14 +1,22 @@
 package ru.kata.spring.boot_security.demo.services;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,7 +25,7 @@ public class UserServicesImp implements UserServices {
     private final RoleServices roleServices;
     private final PasswordEncoder passwordEncoder;
     @Autowired
-    public UserServicesImp(UserDao userDao, RoleServices roleServices,@Lazy PasswordEncoder passwordEncoder) {
+    public UserServicesImp(UserDao userDao, RoleServices roleServices, @Lazy PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.roleServices = roleServices;
         this.passwordEncoder = passwordEncoder;
@@ -67,13 +75,21 @@ public class UserServicesImp implements UserServices {
         userDao.delete(id);
     }
 
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User auth = userDao.showEmail(username);
+        org.hibernate.Hibernate.initialize(auth.getRoles());
+        return new org.springframework.security.core.userdetails.User(auth.getEmail(),auth.getPassword(),
+                roleAuth(auth.getRoles()));
+    }
+
+    private Collection <? extends GrantedAuthority> roleAuth(Set<Role> roles){
+        return roles.stream().map(r-> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+    }
     private void encodePassword(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
     }
-//    @Override
-//    public UserDetails loadUSer(int id) throws UsernameNotFoundException {
-//        return userDao.loadUSer(id);
-//    }
 
 }

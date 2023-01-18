@@ -15,31 +15,28 @@ public class UserDaoImp implements UserDao {
     private EntityManager entityManager;
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<User> listUsers() {
-        String e = "from User";
-        TypedQuery<User> query = entityManager.createQuery(e, User.class);
+        TypedQuery<User> query = entityManager.createQuery("from User", User.class);
         return query.getResultList();
     }
 
     @Override
     public User show(int id) {
-        String e = "from User where id =" + id;
-        TypedQuery<User> query = entityManager.createQuery(e, User.class);
+        TypedQuery<User> query = entityManager.createQuery("from User where id =" + id, User.class);
         return query.getSingleResult();
     }
 
     @Override
     public User showName(String name) {
-        return entityManager.createQuery("from User where name = ?1", User.class)
+        return entityManager.createQuery("select u from User u join fetch u.roles where u.name = ?1", User.class)
                 .setParameter(1, name)
-                .getSingleResult();
+                .getResultList().stream().findFirst().orElse(null);
     }
     @Override
     public User showEmail(String email) {
-        return entityManager.createQuery("from User where email = ?1", User.class)
+        return entityManager.createQuery("select u from User u join fetch u.roles where u.email = ?1", User.class)
                 .setParameter(1, email)
-                .getSingleResult();
+                .getResultList().stream().findFirst().orElse(null);
     }
     @Override
     public void update(User user) {

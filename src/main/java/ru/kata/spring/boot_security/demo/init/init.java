@@ -40,13 +40,7 @@ public class init {
 
             userServices.save(new User("admin","admin", 21 ,"admin@gmail.com","admin", adminRole));
             userServices.save(new User("user", "user", 24 , "user@gmail.com", "user", userRole));
-
-
         }
-
-
-
-
 
     }
 
