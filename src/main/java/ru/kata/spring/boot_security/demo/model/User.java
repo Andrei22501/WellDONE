@@ -26,10 +26,10 @@ public class User implements UserDetails {
     @Column
     private String email;
 
+    private String password;
     @Fetch(FetchMode.JOIN)
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<>();
-    private String password;
 
     public User(String name, String lastname, int age ,String email, String password, Set<Role> roles) {
         this.name = name;

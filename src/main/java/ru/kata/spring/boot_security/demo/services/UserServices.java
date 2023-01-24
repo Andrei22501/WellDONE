@@ -15,9 +15,9 @@ public interface UserServices extends UserDetailsService {
     User showEmail(String email);
 
     @Transactional
-    void update(User user);
+    void update(int id, User user);
     @Transactional
-    void save(User user);
+    User save(User user);
     User show(int id);
     @Transactional
     void delete(int id);

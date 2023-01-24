@@ -54,7 +54,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return getName();
+        return name;
     }
     @Override
     public boolean equals(Object o) {

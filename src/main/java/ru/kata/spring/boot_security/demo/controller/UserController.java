@@ -12,18 +12,14 @@ import ru.kata.spring.boot_security.demo.services.UserServices;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
-    private final UserServices userServices;
-    private final RoleServices roleServices;
-
-    public UserController(UserServices userServices, RoleServices roleServices) {
-        this.userServices = userServices;
-        this.roleServices = roleServices;
+    @GetMapping("/admin")
+    public String admin() {
+        return "/admin";
     }
-    @GetMapping("")
-    public String info(Principal principal, Model model){
-        model.addAttribute("info", userServices.showName(principal.getName()));
-        return "user";
+
+    @GetMapping("/user")
+    public String user() {
+        return "/user";
     }
 }

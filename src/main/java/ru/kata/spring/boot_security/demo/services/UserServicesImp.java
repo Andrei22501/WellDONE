@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.services;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
@@ -48,18 +47,18 @@ public class UserServicesImp implements UserServices {
 
     @Override
     @Transactional
-    public void update(User user) {
+    public void update(int id, User user) {
         encodePassword(user);
         setRolesForUser(user);
         userDao.update(user);
     }
     @Override
     @Transactional
-    public void save(User user) {
-        User us = new User();
+    public User save(User user) {
         encodePassword(user);
         setRolesForUser(user);
         userDao.save(user);
+        return user;
     }
     public void setRolesForUser(User user) {
         user.setRoles(user.getRoles().stream().map(role -> roleServices.showName(role.getName())).collect(Collectors.toSet()));
