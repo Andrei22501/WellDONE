@@ -27,30 +27,30 @@ public class RestControllers {
         this.userServices = userServices;
     }
 
-    @GetMapping("/admin/users")
+    @GetMapping("/admin")
     public ResponseEntity<List<User>> getUsers() {
         List<User> allUsers = userServices.listUsers();
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
-    @GetMapping("/admin/users/{id}")
+    @GetMapping("/admin/{id}")
     public ResponseEntity<User> getUser(@PathVariable("id") int id) {
         User user = userServices.show(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
-    @PostMapping("/admin/users")
+    @PostMapping("/admin")
     public ResponseEntity<HttpStatus> create(@RequestBody User user) {
         userServices.save(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PatchMapping("/admin/users/{id}")
+    @PatchMapping("/admin/{id}")
     public ResponseEntity<Void> editUser (@PathVariable("id") int id, @RequestBody User user) {
         userServices.update(id, user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/admin/users/{id}")
+    @DeleteMapping("/admin/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") int id) {
         userServices.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -1,4 +1,4 @@
-const url = 'http://localhost:8080/api/admin/users/';
+const url = 'http://localhost:8080/api/admin';
 const renderTable = document.getElementById("allUsers");
 
 const renderPosts = (allUsers) => {
